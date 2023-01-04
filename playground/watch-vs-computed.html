@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">{{num}}</div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          num: 10,
+        },
+        computed: {
+          // 입력받은 값을 검증하는 로직으로 많이 활용
+          // 왠만하면 computed를 사용하는 것이 좋다. -> 캐싱/튜닝도 잘되어있고, 간단하게 동작하는 경우가 많을 것이기 때문
+          doubleNum: function () {
+            return this.num * 2;
+          },
+        },
+        watch: {
+          // 무거운 로직에서 많이 활용 -> 매번 실행되기 부담스러운
+          num: function (newValue, oldValue) {
+            this.fetchUserByNumber(newValue);
+            this.fetchUserByNumber(oldValue);
+          },
+        },
+        methods: {
+          fetchUserByNumber: function (num) {
+            console.log(num);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
